@@ -1,0 +1,196 @@
+{% extends 'patient/base.html' %}
+
+{% block body %}
+<head>
+    <!-- Design by foolishdeveloper.com -->
+    <title>Diagnosis</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <!--Stylesheet-->
+    
+    <style media="screen">
+        *,
+        *:before,
+        *:after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #d8e9f7;
+        }
+
+        /* .background {
+            width: 430px;
+            height: 520px;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            left: 50%;
+            top: 50%;
+        } */
+
+        /* .background .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+        } */
+
+        /* .shape:first-child {
+            background: linear-gradient(
+                #005375,
+                #99e1ff
+            );
+            left: -80px;
+            top: -80px;
+        } */
+
+        form {
+            height: 650px;
+            width: 1000px;
+            background-color: rgba(255, 255, 255, 0.13);
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 38%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+            padding: 10px 35px;
+            margin-left: 7%;
+            margin-top: 7%;
+        }
+
+        form * {
+            font-family: 'Poppins', sans-serif;
+            color: #012944;
+            letter-spacing: 0.5px;
+            outline: none;
+            border: none;
+        }
+
+        form h3 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 42px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        input {
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(1, 43, 70, 0.1);
+            border-radius: 3px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        ::placeholder {
+            color: #012b46;
+        }
+
+        /* button {
+            margin-top: 50px;
+            width: 100%;
+            background-color: rgb(1, 43, 70);
+            color: #ffffff;
+            padding: 15px 0;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+        } */
+    </style>
+</head>
+ <!-- <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+
+           
+            <div class="row">
+
+
+                <div class="card-body">
+
+        <h4 class="text-center alert alert-info">Disease Prediction Panel</h4>
+      </div>
+
+    </div>
+    </div>
+    </div> -->
+    
+
+<!--
+    <h5 class="card-title text-primary">Please Fill In Your Symptoms</h5>
+-->
+
+    <form method="POST" action="" class="myform">
+      {% csrf_token %}
+
+      <input type="hidden"  value="{{ user.id }}" name="" id="user_id">
+        <label for="Symptom1" class="col-sm-2 col-form-label">1st Symptom</label>
+        <input type="text" class="form-control" list="symp" multiple="multiple" name="Symptom1" id="Symptom1" placeholder="Please Choose Symptom" required="">
+        
+        <datalist id="symp">
+          {% for symp in symptoms %}
+          <option value= "{{symp}}">{{symp}}</option>
+        {% endfor %}
+        </datalist>
+        <label for="Symptom2" class="col-sm-2 col-form-label">2nd Symptom</label>
+        <input type="text" class="form-control" list="symp" name="Symptom5" id="Symptom2" placeholder="Please Choose Symptom" required="">
+        <datalist id="symp">
+          {% for symp in symptoms %}
+          <option value= "{{symp}}">{{symp}}</option>
+        {% endfor %}
+      </datalist>
+        <label for="Symptom3" class="col-sm-2 col-form-label">3rd Symptom</label>
+            <input type="text" class="form-control" list="symp" name="Symptom3" id="Symptom3" placeholder="Please Choose Symptom" required="">
+        <datalist id="symp">
+          {% for symp in symptoms %}
+          <option value= "{{symp}}">{{symp}}</option>
+        {% endfor %}
+        </datalist>
+        <label for="Symptom4" class="col-sm-2 col-form-label">4th Symptom</label>
+        
+            <input type="text" class="form-control" multiple="multiple" list="symp" id="Symptom4" name="Symptom5" placeholder="Please Choose Symptom" required="">
+        
+        <datalist id="symp">
+          {% for symp in symptoms %}
+          <option value= "{{symp}}">{{symp}}</option>
+        {% endfor %}
+      </datalist>
+        <label for="Symptom5" class="col-sm-2 col-form-label">5th Symptom</label>
+            <input type="text" class="form-control" list="symp" id="Symptom5" name="Symptom5" placeholder="Please Choose Symptom" required="">
+        
+        <datalist id="symp">
+          {% for symp in symptoms %}
+          <option value= "{{symp}}">{{symp}}</option>
+        {% endfor %}
+      </datalist>
+      <br>    
+            <button type="submit" class="btn btn-primary" id="predict_btn" style="margin-top: 10px; width: 100%; background-color: rgb(1, 43, 70); color: #ffffff; padding: 10px 0; font-size: 18px; font-weight: 600; border-radius: 5px; cursor: pointer;">Predict</button>
+      
+
+<div id="result" class="col-sm-10 offset-sm-3"></div>
+ 
+
+</form>
+
+
+
+
+{% endblock %}
